@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZUNIQ Education System | Enterprise Academy & Management Platform</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#2563eb',
+                            600: '#1d4ed8',
+                            700: '#1e40af',
+                            800: '#1e3a8a',
+                            900: '#0f172a',
+                        },
+                        emerald: {
+                            500: '#10b981',
+                            600: '#059669',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .tab-active {
+            border-bottom: 2px solid #1d4ed8;
+            color: #1d4ed8;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-500 selection:text-white pb-16 lg:pb-0">
+
+    <!-- DEMO / GITHUB WATERMARK BANNER -->
+    <div class="bg-slate-900 text-white py-2 px-4 text-xs sm:text-sm font-medium border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+                <span class="bg-emerald-500 text-slate-950 font-bold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Client Demo Template</span>
+                <span>ZUNIQ Education System — Modular & Ready for Customization</span>
+            </div>
+            <div class="flex items-center gap-4 text-slate-300">
+                <a href="https://wa.me/923185390057?text=Hi%20ZUNIQ%20Studio,%20I%20want%20a%20demo%20of%20the%20Education%20Management%20System." target="_blank" class="hover:text-emerald-400 flex items-center gap-1 transition-colors">
+                    <i data-lucide="phone-call" class="w-3.5 h-3.5"></i> Call/WhatsApp: <strong class="text-white">03185390057</strong>
+                </a>
+                <button onclick="toggleAdmissionModal(true)" class="hidden md:inline-flex bg-brand-600 hover:bg-brand-700 text-white px-2.5 py-1 rounded text-xs transition-colors">
+                    Test Admission Flow
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER NAVIGATION -->
+    <header class="sticky top-[37px] z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-slate-900 flex items-center justify-center text-white font-black text-xl shadow-md">
+                        Z
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold tracking-tight text-slate-900 block leading-tight">ZUNIQ <span class="text-brand-600">ACADEMY</span></span>
+                        <span class="text-[10px] font-semibold text-slate-500 tracking-widest uppercase block">Education System</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
+                    <a href="#home" class="hover:text-brand-600 transition-colors">Home</a>
+                    <a href="#programs" class="hover:text-brand-600 transition-colors">Programs</a>
+                    <a href="#faculty" class="hover:text-brand-600 transition-colors">Faculty</a>
+                    <a href="#fees" class="hover:text-brand-600 transition-colors">Fee Matrix</a>
+                    <a href="#timetable" class="hover:text-brand-600 transition-colors">Timetable</a>
+                    <a href="#notices" class="hover:text-brand-600 transition-colors">Notices</a>
+                    <a href="#portals" class="hover:text-brand-600 transition-colors font-semibold text-brand-600">Live Portals</a>
+                    <a href="#faq" class="hover:text-brand-600 transition-colors">FAQ</a>
+                </nav>
+
+                <!-- Action Buttons -->
+                <div class="hidden sm:flex items-center gap-3">
+                    <button onclick="toggleAdmissionModal(true)" class="px-4 py-2 text-sm font-semibold text-brand-600 bg-brand-50 hover:bg-brand-100 rounded-xl transition-all border border-brand-200">
+                        Apply Online
+                    </button>
+                    <a href="#portals" class="px-4 py-2 text-sm font-semibold text-white bg-slate-900 hover:bg-brand-700 rounded-xl transition-all shadow-sm flex items-center gap-2">
+                        <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Portal Demo
+                    </a>
+                </div>
+
+                <!-- Mobile menu toggle -->
+                <div class="flex lg:hidden items-center gap-2">
+                    <button onclick="toggleMobileMenu()" class="p-2 text-slate-600 rounded-lg hover:bg-slate-100 focus:outline-none">
+                        <i data-lucide="menu" id="menuIcon" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileMenu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-slate-700 border-b border-slate-100">Home</a>
+            <a href="#programs" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-slate-700 border-b border-slate-100">Programs</a>
+            <a href="#faculty" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-slate-700 border-b border-slate-100">Faculty</a>
+            <a href="#fees" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-slate-700 border-b border-slate-100">Fee Matrix</a>
+            <a href="#timetable" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-slate-700 border-b border-slate-100">Timetable & Notices</a>
+            <a href="#portals" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-brand-600 border-b border-slate-100 font-bold">Portals Demo (Student/Parent)</a>
+            <a href="#faq" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-slate-700 border-b border-slate-100">FAQ</a>
+            <div class="pt-2 flex flex-col gap-2">
+                <button onclick="toggleMobileMenu(); toggleAdmissionModal(true)" class="w-full py-2.5 text-center font-semibold text-white bg-brand-600 rounded-xl">
+                    Apply Online
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative pt-12 pb-20 lg:pt-20 lg:pb-32 overflow-hidden bg-gradient-to-b from-brand-50/60 via-white to-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Text Column -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-100/80 border border-brand-200 text-brand-700 text-xs font-semibold">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-600"></i>
+                        <span>Enterprise Education Software Solution</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-none">
+                        Elevate Your School with <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-slate-800">ZUNIQ System</span>
+                    </h1>
+
+                    <p class="text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        A modern digital experience tailored for Schools, Tuition Academies, Colleges, and IT Institutes. Includes a high-converting public portal, step-by-step admissions, and robust dashboards for Students & Parents.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <button onclick="toggleAdmissionModal(true)" class="w-full sm:w-auto px-7 py-3.5 text-base font-bold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-lg shadow-brand-500/20 transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            <i data-lucide="file-text" class="w-5 h-5"></i>
+                            Start Admission Demo
+                        </button>
+                        <a href="#portals" class="w-full sm:w-auto px-7 py-3.5 text-base font-bold text-slate-800 bg-white hover:bg-slate-100 rounded-xl border border-slate-300 shadow-sm transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i>
+                            Explore Portal Demo
+                        </a>
+                    </div>
+
+                    <!-- Highlight Badges -->
+                    <div class="pt-6 grid grid-cols-3 gap-4 border-t border-slate-200/80 max-w-lg mx-auto lg:mx-0 text-left">
+                        <div>
+                            <p class="text-2xl font-extrabold text-slate-900">100%</p>
+                            <p class="text-xs text-slate-500 font-medium">Responsive Layout</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-extrabold text-brand-600">2-in-1</p>
+                            <p class="text-xs text-slate-500 font-medium">Web + Portal System</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-extrabold text-emerald-600">Fast</p>
+                            <p class="text-xs text-slate-500 font-medium">Custom Deployment</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Card Graphic Preview -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Background glow -->
+                        <div class="absolute -inset-2 bg-gradient-to-r from-brand-500 to-emerald-500 rounded-3xl blur-xl opacity-20"></div>
+
+                        <div class="relative bg-white rounded-2xl shadow-xl border border-slate-100 p-6 space-y-5">
+                            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-700">
+                                        <i data-lucide="graduation-cap" class="w-5 h-5 text-brand-600"></i>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-sm font-bold text-slate-900">ZUNIQ Smart Dashboard</h2>
+                                        <p class="text-xs text-slate-500">Live Academic Snapshot</p>
+                                    </div>
+                                </div>
+                                <span class="bg-emerald-100 text-emerald-700 text-[11px] font-bold px-2 py-0.5 rounded-full">ACTIVE</span>
+                            </div>
+
+                            <!-- Mini Widget Cards -->
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                    <p class="text-xs text-slate-500 font-medium">Student Attendance</p>
+                                    <p class="text-lg font-extrabold text-slate-900 mt-0.5">94.8%</p>
+                                    <span class="text-[10px] text-emerald-600 font-semibold">↑ Excellent</span>
+                                </div>
+                                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                    <p class="text-xs text-slate-500 font-medium">Fee Balance Status</p>
+                                    <p class="text-lg font-extrabold text-emerald-600 mt-0.5">Paid</p>
+                                    <span class="text-[10px] text-slate-500 font-medium">Receipt #ZN-8832</span>
+                                </div>
+                            </div>
+
+                            <!-- Quick Action Card -->
+                            <div class="p-4 bg-brand-900 text-white rounded-xl space-y-2">
+                                <div class="flex justify-between items-center text-xs text-brand-200">
+                                    <span>Next Upcoming Exam</span>
+                                    <span class="bg-brand-700 text-white px-2 py-0.5 rounded text-[10px]">Oct 15</span>
+                                </div>
+                                <p class="text-sm font-bold text-white">Advanced Mathematics - Mid Term</p>
+                                <div class="w-full bg-brand-800 rounded-full h-1.5 overflow-hidden">
+                                    <div class="bg-emerald-400 h-1.5 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+
+                            <a href="#portals" class="block text-center text-xs font-semibold text-brand-600 hover:text-brand-800 transition-colors">
+                                Click to test full interactive portal below ↓
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGRAMS SECTION -->
+    <section id="programs" class="py-16 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-xs font-bold text-brand-600 tracking-widest uppercase">Academic Excellence</h2>
+                <p class="text-3xl font-extrabold text-slate-900 mt-1">Multi-Track Academic Offerings</p>
+                <p class="text-slate-600 text-sm mt-2">Customizable tracks suitable for Schools, Tuition Academies, Colleges, or Language Institutes.</p>
+                
+                <!-- Filter Tabs -->
+                <div class="flex flex-wrap justify-center gap-2 mt-6" id="programFilters">
+                    <button onclick="filterPrograms('all', this)" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-900 text-white transition-all">All Tracks</button>
+                    <button onclick="filterPrograms('school', this)" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">School & College</button>
+                    <button onclick="filterPrograms('tuition', this)" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Tuition Academy</button>
+                    <button onclick="filterPrograms('it', this)" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">IT & Language</button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="programsGrid">
+                <!-- Javascript will inject programs dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FACULTY SECTION -->
+    <section id="faculty" class="py-16 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <h2 class="text-xs font-bold text-brand-600 tracking-widest uppercase">World-Class Educators</h2>
+                    <p class="text-3xl font-extrabold text-slate-900 mt-1">Meet Our Faculty Leaders</p>
+                </div>
+                <p class="text-sm text-slate-500 mt-2 md:mt-0 max-w-md">Experienced instructors dedicated to student progress and conceptual mastery.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="facultyGrid">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FEE STRUCTURE SECTION -->
+    <section id="fees" class="py-16 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <h2 class="text-xs font-bold text-brand-600 tracking-widest uppercase">Transparent Investment</h2>
+                <p class="text-3xl font-extrabold text-slate-900 mt-1">Structured Fee Matrix</p>
+                <p class="text-sm text-slate-600 mt-2">Clear breakdown of admission fees, monthly tuition, and lab/library contributions.</p>
+            </div>
+
+            <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm">
+                <table class="w-full text-left border-collapse min-w-[600px]">
+                    <thead>
+                        <tr class="bg-slate-900 text-white text-xs uppercase font-bold tracking-wider">
+                            <th class="p-4">Grade / Program</th>
+                            <th class="p-4">Admission Fee (One-Time)</th>
+                            <th class="p-4">Monthly Tuition</th>
+                            <th class="p-4">Lab & IT Charges</th>
+                            <th class="p-4 text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-sm font-medium text-slate-700" id="feeTableBody">
+                        <!-- Injected via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-4 p-4 rounded-xl bg-brand-50 border border-brand-100 text-xs text-brand-800 flex items-center justify-between">
+                <span>* Note: Customized sibling discounts and merit scholarships are available during physical counseling.</span>
+                <button onclick="toggleAdmissionModal(true)" class="font-bold underline text-brand-700 hover:text-brand-900">Apply for Scholarship</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIMETABLE & NOTICES SECTION -->
+    <section id="timetable" class="py-16 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-8">
+                
+                <!-- Timetable Column -->
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">Daily Class Timetable</h3>
+                            <p class="text-xs text-slate-500">Live operational schedule for active classes</p>
+                        </div>
+                        <select id="classTimetableFilter" onchange="renderTimetable()" class="text-xs font-semibold bg-slate-100 border border-slate-300 rounded-lg px-3 py-1.5 text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            <option value="Class 9 Science">Class 9 Science</option>
+                            <option value="Class 10 Pre-Med">Class 10 Pre-Med</option>
+                            <option value="IT Certification Track">IT Certification Track</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-3" id="timetableContainer">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Announcements & Notices -->
+                <div id="notices" class="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="bell" class="w-5 h-5 text-brand-600"></i>
+                            <h3 class="text-lg font-bold text-slate-900">Latest Campus Notices</h3>
+                        </div>
+                        <span class="bg-red-100 text-red-600 font-bold text-[10px] px-2 py-0.5 rounded-full uppercase">Live Feed</span>
+                    </div>
+
+                    <div class="space-y-4 flex-1 overflow-y-auto max-h-[380px] pr-1" id="noticesList">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- DEMO PORTALS SWITCHER (STUDENT & PARENT DASHBOARDS) -->
+    <section id="portals" class="py-20 bg-slate-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="bg-brand-500/20 text-brand-300 border border-brand-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                    Interactive Software Demonstration
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">ZUNIQ Portal Experience</h2>
+                <p class="text-slate-400 text-sm mt-2">
+                    Switch between the **Student Portal** and **Parent Portal** below to see how our software streamlines academics, fee tracking, and communication.
+                </p>
+
+                <!-- Portal Switcher Buttons -->
+                <div class="inline-flex p-1 bg-slate-800 rounded-2xl border border-slate-700 mt-6">
+                    <button id="btnStudentPortal" onclick="switchPortal('student')" class="px-6 py-2.5 rounded-xl text-sm font-bold bg-brand-600 text-white shadow-md transition-all flex items-center gap-2">
+                        <i data-lucide="user" class="w-4 h-4"></i> Student Portal
+                    </button>
+                    <button id="btnParentPortal" onclick="switchPortal('parent')" class="px-6 py-2.5 rounded-xl text-sm font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                        <i data-lucide="users" class="w-4 h-4"></i> Parent Portal
+                    </button>
+                </div>
+            </div>
+
+            <!-- PORTAL CONTAINER CONTAINER -->
+            <div class="bg-slate-950 border border-slate-800 rounded-3xl p-4 sm:p-8 shadow-2xl">
+                
+                <!-- 1. STUDENT PORTAL CONTENT -->
+                <div id="studentPortalView" class="space-y-8">
+                    <!-- Student Header Summary -->
+                    <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-500 flex items-center justify-center text-white text-2xl font-black shadow-lg">
+                                ZA
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h3 class="text-xl font-bold text-white">Zain Ahmed</h3>
+                                    <span class="bg-emerald-500/20 text-emerald-400 text-xs font-bold px-2 py-0.5 rounded border border-emerald-500/30">Roll # 2026-904</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-1">Class 10 (Pre-Engineering) • Section A • Session 2026-27</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 border-t md:border-t-0 border-slate-800 pt-3 md:pt-0 w-full md:w-auto justify-between md:justify-end">
+                            <div class="text-right">
+                                <p class="text-xs text-slate-400">Term Average</p>
+                                <p class="text-lg font-bold text-emerald-400">91.4% (A+)</p>
+                            </div>
+                            <div class="text-right border-l border-slate-800 pl-4">
+                                <p class="text-xs text-slate-400">Attendance</p>
+                                <p class="text-lg font-bold text-brand-400">96.2%</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Student Dashboard Grid -->
+                    <div class="grid lg:grid-cols-12 gap-6">
+                        
+                        <!-- Left: Chart & Subjects Gradebook -->
+                        <div class="lg:col-span-8 space-y-6">
+                            
+                            <!-- Radial Chart / Performance Bar -->
+                            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                                <h4 class="text-sm font-bold text-white mb-4 flex items-center gap-2">
+                                    <i data-lucide="line-chart" class="w-4 h-4 text-brand-400"></i> Performance Breakdown
+                                </h4>
+                                <div class="h-56 relative">
+                                    <canvas id="studentPerformanceChart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Subject Gradebook -->
+                            <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+                                <div class="px-6 py-4 border-b border-slate-800 flex justify-between items-center">
+                                    <h4 class="text-sm font-bold text-white">Recent Subject Marks</h4>
+                                    <span class="text-xs text-slate-400">First Term Evaluation</span>
+                                </div>
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-left text-xs">
+                                        <thead class="bg-slate-950 text-slate-400 uppercase font-semibold">
+                                            <tr>
+                                                <th class="p-3 pl-6">Subject</th>
+                                                <th class="p-3">Total Marks</th>
+                                                <th class="p-3">Obtained</th>
+                                                <th class="p-3">Grade</th>
+                                                <th class="p-3 text-right pr-6">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-slate-800 text-slate-300">
+                                            <tr>
+                                                <td class="p-3 pl-6 font-semibold text-white">Mathematics</td>
+                                                <td class="p-3">100</td>
+                                                <td class="p-3 font-bold text-emerald-400">95</td>
+                                                <td class="p-3">A+</td>
+                                                <td class="p-3 text-right pr-6"><span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Passed</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-3 pl-6 font-semibold text-white">Physics</td>
+                                                <td class="p-3">100</td>
+                                                <td class="p-3 font-bold text-emerald-400">89</td>
+                                                <td class="p-3">A+</td>
+                                                <td class="p-3 text-right pr-6"><span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Passed</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-3 pl-6 font-semibold text-white">Computer Science</td>
+                                                <td class="p-3">100</td>
+                                                <td class="p-3 font-bold text-emerald-400">98</td>
+                                                <td class="p-3">A+</td>
+                                                <td class="p-3 text-right pr-6"><span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Passed</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-3 pl-6 font-semibold text-white">English Literature</td>
+                                                <td class="p-3">100</td>
+                                                <td class="p-3 font-bold text-brand-400">83</td>
+                                                <td class="p-3">A</td>
+                                                <td class="p-3 text-right pr-6"><span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Passed</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Right: Assignments & Downloads -->
+                        <div class="lg:col-span-4 space-y-6">
+                            
+                            <!-- Assignments Checklist -->
+                            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3">
+                                <h4 class="text-sm font-bold text-white flex items-center justify-between">
+                                    <span>Active Assignments</span>
+                                    <span class="text-xs text-brand-400 font-normal">2 Pending</span>
+                                </h4>
+
+                                <div class="space-y-2.5">
+                                    <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-start gap-3">
+                                        <input type="checkbox" class="mt-1 rounded bg-slate-800 border-slate-700 text-brand-600 focus:ring-0">
+                                        <div>
+                                            <p class="text-xs font-semibold text-white">Physics Numerical Sheet #4</p>
+                                            <p class="text-[10px] text-slate-400">Due: Tomorrow, 11:59 PM</p>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-start gap-3">
+                                        <input type="checkbox" class="mt-1 rounded bg-slate-800 border-slate-700 text-brand-600 focus:ring-0">
+                                        <div>
+                                            <p class="text-xs font-semibold text-white">Math Calculus Lab Report</p>
+                                            <p class="text-[10px] text-slate-400">Due: Oct 05, 2026</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Download Resources -->
+                            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3">
+                                <h4 class="text-sm font-bold text-white">Study Notes & Syllabus PDF</h4>
+                                <div class="space-y-2">
+                                    <button onclick="simulateDownload('Class_10_Math_Syllabus.pdf')" class="w-full text-left p-2.5 bg-slate-950 hover:bg-slate-800 rounded-xl border border-slate-800 flex items-center justify-between text-xs transition-colors">
+                                        <span class="text-slate-300 font-medium truncate">📄 Class_10_Math_Syllabus.pdf</span>
+                                        <i data-lucide="download" class="w-4 h-4 text-brand-400 flex-shrink-0"></i>
+                                    </button>
+                                    <button onclick="simulateDownload('Physics_Ch_3_Notes.pdf')" class="w-full text-left p-2.5 bg-slate-950 hover:bg-slate-800 rounded-xl border border-slate-800 flex items-center justify-between text-xs transition-colors">
+                                        <span class="text-slate-300 font-medium truncate">📄 Physics_Ch_3_Notes.pdf</span>
+                                        <i data-lucide="download" class="w-4 h-4 text-brand-400 flex-shrink-0"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 2. PARENT EXPERIENCE PORTAL CONTENT -->
+                <div id="parentPortalView" class="hidden space-y-8">
+                    
+                    <!-- Parent Header Overview -->
+                    <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white text-2xl font-black shadow-lg">
+                                MR
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Parent Portal Overview</h3>
+                                <p class="text-xs text-slate-400 mt-0.5">Guardian: Mr. Tariq Ahmed • Linked Children: 2</p>
+                            </div>
+                        </div>
+
+                        <!-- Active Child Select Box -->
+                        <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex items-center gap-2">
+                            <span class="text-xs text-slate-400 pl-2">Child Selected:</span>
+                            <select id="parentChildSelect" onchange="switchParentChild(this.value)" class="bg-slate-900 text-white text-xs font-bold py-1.5 px-3 rounded-lg border border-slate-700 focus:outline-none">
+                                <option value="zain">Zain Ahmed (Class 10)</option>
+                                <option value="ayesha">Ayesha Ahmed (Class 8)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Parent Overview Cards -->
+                    <div class="grid sm:grid-cols-3 gap-6" id="parentMetricsCards">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+
+                    <!-- Detailed Fee Receipt & Direct Contact Bar -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        
+                        <!-- Fee Status Box -->
+                        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+                            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                                <h4 class="text-sm font-bold text-white">Current Fee Receipt Ledger</h4>
+                                <span class="bg-emerald-500/20 text-emerald-400 text-xs font-bold px-2 py-0.5 rounded">NO DUES</span>
+                            </div>
+
+                            <div class="space-y-2 text-xs">
+                                <div class="flex justify-between text-slate-400">
+                                    <span>Billing Month:</span>
+                                    <strong class="text-white">September 2026</strong>
+                                </div>
+                                <div class="flex justify-between text-slate-400">
+                                    <span>Tuition Fee:</span>
+                                    <strong class="text-white">Rs. 8,500</strong>
+                                </div>
+                                <div class="flex justify-between text-slate-400">
+                                    <span>Computer Lab Fee:</span>
+                                    <strong class="text-white">Rs. 1,000</strong>
+                                </div>
+                                <div class="flex justify-between text-slate-400 pt-2 border-t border-slate-800 text-sm font-bold">
+                                    <span class="text-white">Total Amount Paid:</span>
+                                    <span class="text-emerald-400">Rs. 9,500</span>
+                                </div>
+                            </div>
+
+                            <button onclick="alert('Demo Mode: Official Paid Voucher Receipt PDF generating...')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-2">
+                                <i data-lucide="printer" class="w-4 h-4"></i> Download Payment Receipt
+                            </button>
+                        </div>
+
+                        <!-- Direct WhatsApp Contact School Principal -->
+                        <div class="bg-gradient-to-br from-emerald-950/40 to-slate-900 p-6 rounded-2xl border border-emerald-900/50 space-y-4 flex flex-col justify-between">
+                            <div>
+                                <div class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 mb-2">
+                                    <i data-lucide="message-square" class="w-4 h-4"></i> Parent Direct Desk
+                                </div>
+                                <h4 class="text-base font-bold text-white">Have Concerns Regarding Your Child?</h4>
+                                <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                                    Directly communicate with the Principal's Desk or Class Teacher on WhatsApp with one click.
+                                </p>
+                            </div>
+
+                            <a href="https://wa.me/923185390057?text=Hello%20ZUNIQ%20Academy%20Admin,%20I%20am%20a%20parent%20and%20need%20information." target="_blank" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-xs text-center transition-all shadow-lg flex items-center justify-center gap-2">
+                                <i data-lucide="phone" class="w-4 h-4"></i> WhatsApp Principal Direct (03185390057)
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- GALLERY & EVENTS SECTION -->
+    <section class="py-16 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-xs font-bold text-brand-600 tracking-widest uppercase">Life at ZUNIQ</h2>
+                <p class="text-3xl font-extrabold text-slate-900 mt-1">Campus Life & Upcoming Events</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Event Card 1 -->
+                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-brand-100 text-brand-700 font-bold text-[10px] px-2 py-0.5 rounded">UPCOMING EVENT</span>
+                        <span class="text-xs font-bold text-slate-500">Oct 24, 2026</span>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">Annual Science & Robotics Exhibition</h3>
+                    <p class="text-xs text-slate-600">Students showcase working STEM models and robotic projects to visiting parents.</p>
+                </div>
+
+                <!-- Event Card 2 -->
+                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-emerald-100 text-emerald-700 font-bold text-[10px] px-2 py-0.5 rounded">SPORTS</span>
+                        <span class="text-xs font-bold text-slate-500">Nov 12, 2026</span>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">Inter-Academy Cricket Championship</h3>
+                    <p class="text-xs text-slate-600">Annual sports gala featuring track, field, and cricket tournaments.</p>
+                </div>
+
+                <!-- Event Card 3 -->
+                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-purple-100 text-purple-700 font-bold text-[10px] px-2 py-0.5 rounded">WORKSHOP</span>
+                        <span class="text-xs font-bold text-slate-500">Dec 02, 2026</span>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">IT Career & Artificial Intelligence Seminar</h3>
+                    <p class="text-xs text-slate-600">Guidance for high-school students on computer science careers and modern AI skills.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ ACCORDION SECTION -->
+    <section id="faq" class="py-16 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-xs font-bold text-brand-600 tracking-widest uppercase">Got Questions?</h2>
+                <p class="text-3xl font-extrabold text-slate-900 mt-1">Frequently Asked Questions</p>
+            </div>
+
+            <div class="space-y-3" id="faqAccordion">
+                <!-- Javascript will render FAQs -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & FOOTER SECTION -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-800">
+                
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2 text-white font-bold text-lg">
+                        <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white font-black text-sm">Z</div>
+                        ZUNIQ Education
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        A complete software presentation developed by ZUNIQ Studio. Ready to customize for your school, academy, or IT center.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-3">Quick Navigation</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#home" class="hover:text-white transition-colors">Home Page</a></li>
+                        <li><a href="#programs" class="hover:text-white transition-colors">Programs & Courses</a></li>
+                        <li><a href="#fees" class="hover:text-white transition-colors">Fee Matrix</a></li>
+                        <li><a href="#portals" class="hover:text-white transition-colors">Portal Demonstration</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-3">System Developer</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><strong class="text-white">Studio Name:</strong> ZUNIQ Studio</li>
+                        <li><strong class="text-white">Phone / WhatsApp:</strong> 03185390057</li>
+                        <li><strong class="text-white">Location:</strong> Main Academy Campus, Education Zone</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-3">Need a System Like This?</h4>
+                    <p class="text-xs text-slate-400 mb-3">We can customize this platform with your school logo, name, fees, and database integration.</p>
+                    <a href="https://wa.me/923185390057?text=Hi%20ZUNIQ%20Studio,%20I%20am%20interested%20in%20buying/customizing%20this%20Education%20System." target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-xs transition-colors">
+                        <i data-lucide="phone-call" class="w-3.5 h-3.5"></i> Order For Your School
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-3">
+                <p>© 2026 ZUNIQ Studio (Contact: 03185390057). All rights reserved.</p>
+                <p>Designed for GitHub Demonstration & Client Presentations</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- STICKY MOBILE QUICK-ACTION BAR -->
+    <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 px-4 py-2.5 z-40 flex items-center justify-between shadow-lg">
+        <a href="https://wa.me/923185390057?text=Hi%20ZUNIQ%20Studio,%20I%20have%20an%20inquiry." target="_blank" class="flex-1 mr-2 py-2.5 bg-emerald-600 text-white rounded-xl text-xs font-bold text-center flex items-center justify-center gap-1.5 shadow-sm">
+            <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp
+        </a>
+        <a href="tel:03185390057" class="flex-1 ml-2 py-2.5 bg-slate-900 text-white rounded-xl text-xs font-bold text-center flex items-center justify-center gap-1.5 shadow-sm">
+            <i data-lucide="phone" class="w-4 h-4"></i> Call Now
+        </a>
+    </div>
+
+    <!-- 5-STEP ONLINE ADMISSION WORKFLOW MODAL -->
+    <div id="admissionModal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto relative">
+            
+            <!-- Modal Close -->
+            <button onclick="toggleAdmissionModal(false)" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="border-b border-slate-100 pb-4 mb-6">
+                <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">ZUNIQ Online Admission</span>
+                <h3 class="text-2xl font-extrabold text-slate-900">Student Application Form</h3>
+                <p class="text-xs text-slate-500 mt-1">Demonstration flow. Step-by-step interactive entry.</p>
+            </div>
+
+            <!-- STEP INDICATOR -->
+            <div class="flex justify-between items-center mb-8 px-2">
+                <div id="stepDot1" class="w-8 h-8 rounded-full bg-brand-600 text-white font-bold text-xs flex items-center justify-center">1</div>
+                <div class="flex-1 h-1 bg-slate-200 mx-2"></div>
+                <div id="stepDot2" class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 font-bold text-xs flex items-center justify-center">2</div>
+                <div class="flex-1 h-1 bg-slate-200 mx-2"></div>
+                <div id="stepDot3" class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 font-bold text-xs flex items-center justify-center">3</div>
+                <div class="flex-1 h-1 bg-slate-200 mx-2"></div>
+                <div id="stepDot4" class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 font-bold text-xs flex items-center justify-center">4</div>
+                <div class="flex-1 h-1 bg-slate-200 mx-2"></div>
+                <div id="stepDot5" class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 font-bold text-xs flex items-center justify-center">5</div>
+            </div>
+
+            <!-- FORM STEPS CONTENT -->
+            <form id="admissionForm" onsubmit="handleFormSubmit(event)">
+                
+                <!-- STEP 1: PROGRAM CHOICE -->
+                <div id="formStep1" class="space-y-4">
+                    <h4 class="text-sm font-bold text-slate-900">Step 1: Select Academic Track</h4>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Target Program / Grade *</label>
+                        <select id="admProgram" required class="w-full text-sm p-3 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            <option value="">Select desired program...</option>
+                            <option value="Metric Science (Grade 9-10)">Metric Science (Grade 9-10)</option>
+                            <option value="FSc Pre-Medical / Engineering">FSc Pre-Medical / Engineering</option>
+                            <option value="Evening Tuition Academy">Evening Tuition Academy</option>
+                            <option value="Full Stack Web Development">Full Stack Web Development</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- STEP 2: STUDENT DETAILS -->
+                <div id="formStep2" class="hidden space-y-4">
+                    <h4 class="text-sm font-bold text-slate-900">Step 2: Student Details</h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name *</label>
+                            <input type="text" id="admStudentName" placeholder="e.g. Zain Ahmed" class="w-full text-sm p-3 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Date of Birth</label>
+                            <input type="date" id="admDob" class="w-full text-sm p-3 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3: PARENT DETAILS -->
+                <div id="formStep3" class="hidden space-y-4">
+                    <h4 class="text-sm font-bold text-slate-900">Step 3: Parent / Guardian Information</h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Guardian Name *</label>
+                            <input type="text" id="admParentName" placeholder="e.g. Tariq Ahmed" class="w-full text-sm p-3 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Contact Phone / WhatsApp *</label>
+                            <input type="tel" id="admParentPhone" placeholder="03185390057" class="w-full text-sm p-3 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 4: PREVIOUS EDUCATION -->
+                <div id="formStep4" class="hidden space-y-4">
+                    <h4 class="text-sm font-bold text-slate-900">Step 4: Previous Academic Background</h4>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Previous School / Institute Name</label>
+                        <input type="text" id="admPrevSchool" placeholder="Name of previous school" class="w-full text-sm p-3 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Last Obtained Marks / Grade</label>
+                        <input type="text" id="admPrevGrade" placeholder="e.g. 88% or Grade A" class="w-full text-sm p-3 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    </div>
+                </div>
+
+                <!-- STEP 5: REVIEW & SUBMISSION PREVIEW -->
+                <div id="formStep5" class="hidden space-y-4">
+                    <h4 class="text-sm font-bold text-slate-900">Step 5: Application Summary Review</h4>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-xs text-slate-700" id="admissionSummaryBox">
+                        <!-- Populated dynamic summary -->
+                    </div>
+                </div>
+
+                <!-- NAVIGATION BUTTONS -->
+                <div class="flex justify-between items-center mt-8 pt-4 border-t border-slate-100">
+                    <button type="button" id="btnPrevStep" onclick="navigateStep(-1)" class="px-5 py-2.5 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors hidden">
+                        Back
+                    </button>
+                    <button type="button" id="btnNextStep" onclick="navigateStep(1)" class="ml-auto px-6 py-2.5 text-xs font-bold text-white bg-brand-600 hover:bg-brand-700 rounded-xl transition-colors">
+                        Next Step
+                    </button>
+                    <button type="submit" id="btnSubmitForm" class="ml-auto px-6 py-2.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl transition-colors hidden">
+                        Submit Demo Application
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <script>
+        // Central Data Layer (Easily Editable JSON for Client Customization)
+        const systemData = {
+            programs: [
+                {
+                    category: 'school',
+                    title: 'Secondary School (Grades 9-10)',
+                    desc: 'Complete science and arts matriculation preparation with focused lab practicals.',
+                    badge: 'Full Time',
+                    duration: '2 Academic Years'
+                },
+                {
+                    category: 'school',
+                    title: 'Higher Secondary (FSc Pre-Med / Eng)',
+                    desc: 'Rigorous board exam preparation along with conceptual entry-test fundamentals.',
+                    badge: 'College Level',
+                    duration: '2 Academic Years'
+                },
+                {
+                    category: 'tuition',
+                    title: 'Evening Coaching Academy',
+                    desc: 'Subject-specific evening crash courses for Class 8 to 12 in Math, Physics & Chemistry.',
+                    badge: 'Evening Batch',
+                    duration: 'Monthly Modules'
+                },
+                {
+                    category: 'it',
+                    title: 'Full-Stack Web Development',
+                    desc: 'Modern software engineering bootcamp covering HTML, Tailwind, JS, and React basics.',
+                    badge: 'IT Institute Track',
+                    duration: '6 Months Diploma'
+                },
+                {
+                    category: 'it',
+                    title: 'Spoken English & Communication',
+                    desc: 'Confidence building, professional grammar, and public speaking academy module.',
+                    badge: 'Language Academy',
+                    duration: '3 Months'
+                }
+            ],
+            faculty: [
+                { name: 'Prof. Tariq Mahmood', role: 'Head of Mathematics', exp: '14+ Yrs Exp', tag: 'M.Sc Mathematics' },
+                { name: 'Dr. Saima Alvi', role: 'Senior Physics Faculty', exp: '10+ Yrs Exp', tag: 'Ph.D Physics' },
+                { name: 'Engr. Usman Khan', role: 'Lead IT & Web Instructor', exp: '8+ Yrs Exp', tag: 'Software Engineer' },
+                { name: 'Ms. Ayesha Siddiqui', role: 'English & Communication', exp: '6+ Yrs Exp', tag: 'M.A English Literature' }
+            ],
+            fees: [
+                { grade: 'Grade 9 & 10 (Science)', admission: 'Rs. 5,000', tuition: 'Rs. 6,500 / mo', lab: 'Rs. 1,000' },
+                { grade: 'Class 11 & 12 (Pre-Eng / Med)', admission: 'Rs. 8,000', tuition: 'Rs. 8,500 / mo', lab: 'Rs. 1,500' },
+                { grade: 'Tuition Academy (Per Subject)', admission: 'Rs. 2,000', tuition: 'Rs. 3,000 / mo', lab: 'N/A' },
+                { grade: 'IT Certification Track', admission: 'Rs. 5,000', tuition: 'Rs. 9,000 / mo', lab: 'Included' }
+            ],
+            timetables: {
+                'Class 9 Science': [
+                    { time: '08:00 AM - 09:00 AM', subject: 'Mathematics', teacher: 'Prof. Tariq Mahmood', room: 'Room 102' },
+                    { time: '09:00 AM - 10:00 AM', subject: 'Physics Practical', teacher: 'Dr. Saima Alvi', room: 'Physics Lab A' },
+                    { time: '10:15 AM - 11:15 AM', subject: 'English Grammar', teacher: 'Ms. Ayesha Siddiqui', room: 'Room 102' }
+                ],
+                'Class 10 Pre-Med': [
+                    { time: '08:00 AM - 09:00 AM', subject: 'Biology Special', teacher: 'Dr. Farooq', room: 'Bio Lab' },
+                    { time: '09:00 AM - 10:00 AM', subject: 'Chemistry', teacher: 'Prof. Hassan', room: 'Room 204' }
+                ],
+                'IT Certification Track': [
+                    { time: '04:00 PM - 06:00 PM', subject: 'Web App Development', teacher: 'Engr. Usman Khan', room: 'Computer Lab 1' }
+                ]
+            },
+            notices: [
+                { title: 'Parent-Teacher Meeting (PTM) Scheduled', date: 'October 10, 2026', type: 'Urgent' },
+                { title: 'First Term Examination Schedule Released', date: 'October 15, 2026', type: 'Exams' },
+                { title: 'Submissions Open for Annual Robotics Gala', date: 'October 20, 2026', type: 'Events' }
+            ],
+            faqs: [
+                { q: 'Can this ZUNIQ Education System be customized for our institute?', a: 'Yes! ZUNIQ Studio provides 100% full customization including your school name, logo, customized fee packages, student portal fields, and custom backend options.' },
+                { q: 'How do parents receive fee receipt updates?', a: 'The parent portal allows instant viewing of payment vouchers, along with automated direct WhatsApp links to your principal or account office.' },
+                { q: 'Is this template mobile responsive?', a: 'Yes, it is built mobile-first with collapsible navigation and dedicated mobile quick-action call/WhatsApp buttons.' }
+            ]
+        };
+
+        // State Management
+        let currentStep = 1;
+        let activePortal = 'student';
+        let chartInstance = null;
+
+        // Initialize Page
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderPrograms('all');
+            renderFaculty();
+            renderFeeTable();
+            renderTimetable();
+            renderNotices();
+            renderFaqs();
+            initStudentChart();
+            renderParentChildMetrics('zain');
+        });
+
+        // Toggle Mobile Navigation
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Filter Academic Programs
+        function filterPrograms(cat, btn) {
+            // Update button styles
+            const buttons = document.querySelectorAll('#programFilters button');
+            buttons.forEach(b => {
+                b.className = 'px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all';
+            });
+            btn.className = 'px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-900 text-white transition-all';
+
+            renderPrograms(cat);
+        }
+
+        function renderPrograms(category) {
+            const grid = document.getElementById('programsGrid');
+            grid.innerHTML = '';
+
+            const items = category === 'all' 
+                ? systemData.programs 
+                : systemData.programs.filter(p => p.category === category);
+
+            items.forEach(p => {
+                grid.innerHTML += `
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col justify-between hover:shadow-md transition-all">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-brand-100 text-brand-700 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">${p.badge}</span>
+                                <span class="text-xs text-slate-400 font-medium">${p.duration}</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900">${p.title}</h3>
+                            <p class="text-xs text-slate-600 mt-2 leading-relaxed">${p.desc}</p>
+                        </div>
+                        <button onclick="toggleAdmissionModal(true)" class="mt-6 w-full py-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-xl text-xs font-bold text-slate-800 transition-colors">
+                            Apply For Track
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        function renderFaculty() {
+            const grid = document.getElementById('facultyGrid');
+            grid.innerHTML = '';
+            systemData.faculty.forEach(f => {
+                grid.innerHTML += `
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
+                        <div class="w-16 h-16 rounded-full bg-slate-100 text-slate-700 mx-auto flex items-center justify-center font-bold text-xl mb-3">
+                            ${f.name.charAt(0)}
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900">${f.name}</h4>
+                        <p class="text-xs text-brand-600 font-medium">${f.role}</p>
+                        <div class="mt-3 pt-3 border-t border-slate-100 flex justify-between text-[11px] text-slate-500">
+                            <span>${f.exp}</span>
+                            <span class="font-semibold text-slate-700">${f.tag}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function renderFeeTable() {
+            const tbody = document.getElementById('feeTableBody');
+            tbody.innerHTML = '';
+            systemData.fees.forEach(row => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 font-bold text-slate-900">${row.grade}</td>
+                        <td class="p-4">${row.admission}</td>
+                        <td class="p-4 text-emerald-600 font-semibold">${row.tuition}</td>
+                        <td class="p-4">${row.lab}</td>
+                        <td class="p-4 text-center">
+                            <button onclick="toggleAdmissionModal(true)" class="px-3 py-1 bg-brand-600 hover:bg-brand-700 text-white rounded-lg text-xs font-semibold">
+                                Enroll Now
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function renderTimetable() {
+            const selected = document.getElementById('classTimetableFilter').value;
+            const container = document.getElementById('timetableContainer');
+            container.innerHTML = '';
+
+            const list = systemData.timetables[selected] || [];
+            list.forEach(item => {
+                container.innerHTML += `
+                    <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                        <div>
+                            <span class="text-xs font-bold text-brand-600">${item.time}</span>
+                            <h4 class="text-sm font-bold text-slate-900">${item.subject}</h4>
+                            <p class="text-xs text-slate-500">${item.teacher}</p>
+                        </div>
+                        <span class="bg-white border border-slate-200 text-slate-700 text-xs font-semibold px-2.5 py-1 rounded-lg">
+                            ${item.room}
+                        </span>
+                    </div>
+                `;
+            });
+        }
+
+        function renderNotices() {
+            const list = document.getElementById('noticesList');
+            list.innerHTML = '';
+            systemData.notices.forEach(n => {
+                list.innerHTML += `
+                    <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                        <div class="flex justify-between items-center text-[11px]">
+                            <span class="font-bold text-slate-400">${n.date}</span>
+                            <span class="bg-brand-100 text-brand-700 px-2 py-0.5 rounded font-bold">${n.type}</span>
+                        </div>
+                        <h4 class="text-xs font-bold text-slate-900">${n.title}</h4>
+                    </div>
+                `;
+            });
+        }
+
+        function renderFaqs() {
+            const acc = document.getElementById('faqAccordion');
+            acc.innerHTML = '';
+            systemData.faqs.forEach((faq, index) => {
+                acc.innerHTML += `
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                        <button onclick="toggleFaq(${index})" class="w-full text-left p-4 font-bold text-sm text-slate-900 flex justify-between items-center">
+                            <span>${faq.q}</span>
+                            <i data-lucide="chevron-down" id="faqIcon${index}" class="w-4 h-4 text-slate-500 transition-transform"></i>
+                        </button>
+                        <div id="faqAns${index}" class="hidden p-4 pt-0 text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                            ${faq.a}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function toggleFaq(index) {
+            const ans = document.getElementById(`faqAns${index}`);
+            const icon = document.getElementById(`faqIcon${index}`);
+            ans.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Switch Portals (Student vs Parent)
+        function switchPortal(portal) {
+            activePortal = portal;
+            const studentBtn = document.getElementById('btnStudentPortal');
+            const parentBtn = document.getElementById('btnParentPortal');
+            const studentView = document.getElementById('studentPortalView');
+            const parentView = document.getElementById('parentPortalView');
+
+            if (portal === 'student') {
+                studentBtn.className = 'px-6 py-2.5 rounded-xl text-sm font-bold bg-brand-600 text-white shadow-md transition-all flex items-center gap-2';
+                parentBtn.className = 'px-6 py-2.5 rounded-xl text-sm font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2';
+                studentView.classList.remove('hidden');
+                parentView.classList.add('hidden');
+            } else {
+                parentBtn.className = 'px-6 py-2.5 rounded-xl text-sm font-bold bg-emerald-600 text-white shadow-md transition-all flex items-center gap-2';
+                studentBtn.className = 'px-6 py-2.5 rounded-xl text-sm font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2';
+                parentView.classList.remove('hidden');
+                studentView.classList.add('hidden');
+            }
+        }
+
+        // Student Portal Performance Chart
+        function initStudentChart() {
+            const ctx = document.getElementById('studentPerformanceChart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mathematics', 'Physics', 'Chemistry', 'Computer', 'English'],
+                    datasets: [{
+                        label: 'Obtained Marks (%)',
+                        data: [95, 89, 91, 98, 83],
+                        backgroundColor: '#2563eb',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { max: 100, ticks: { color: '#94a3b8' }, grid: { color: '#334155' } },
+                        x: { ticks: { color: '#94a3b8' }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // Parent Portal Child Switcher
+        function switchParentChild(childKey) {
+            renderParentChildMetrics(childKey);
+        }
+
+        function renderParentChildMetrics(childKey) {
+            const container = document.getElementById('parentMetricsCards');
+            if (childKey === 'zain') {
+                container.innerHTML = `
+                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                        <p class="text-xs text-slate-400 font-medium">Child Attendance</p>
+                        <p class="text-2xl font-black text-white mt-1">96.2%</p>
+                        <span class="text-[10px] text-emerald-400 font-bold">Regular Attendance</span>
+                    </div>
+                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                        <p class="text-xs text-slate-400 font-medium">Recent Term Result</p>
+                        <p class="text-2xl font-black text-emerald-400 mt-1">91.4% (Grade A+)</p>
+                        <span class="text-[10px] text-slate-400">Position: 2nd in Class</span>
+                    </div>
+                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                        <p class="text-xs text-slate-400 font-medium">Pending Dues</p>
+                        <p class="text-2xl font-black text-white mt-1">Rs. 0</p>
+                        <span class="text-[10px] text-emerald-400 font-bold">Clear for Term</span>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                        <p class="text-xs text-slate-400 font-medium">Child Attendance</p>
+                        <p class="text-2xl font-black text-white mt-1">92.0%</p>
+                        <span class="text-[10px] text-emerald-400 font-bold">Good Standing</span>
+                    </div>
+                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                        <p class="text-xs text-slate-400 font-medium">Recent Term Result</p>
+                        <p class="text-2xl font-black text-brand-400 mt-1">87.0% (Grade A)</p>
+                        <span class="text-[10px] text-slate-400">Position: 5th in Class</span>
+                    </div>
+                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                        <p class="text-xs text-slate-400 font-medium">Pending Dues</p>
+                        <p class="text-2xl font-black text-white mt-1">Rs. 0</p>
+                        <span class="text-[10px] text-emerald-400 font-bold">Clear for Term</span>
+                    </div>
+                `;
+            }
+        }
+
+        function simulateDownload(filename) {
+            alert(`Demo Download Started: ${filename}\n(In production, this downloads the actual PDF resource from your server).`);
+        }
+
+        // Online Admission Modal Workflow Logic
+        function toggleAdmissionModal(show) {
+            const modal = document.getElementById('admissionModal');
+            if (show) {
+                modal.classList.remove('hidden');
+                currentStep = 1;
+                updateStepUI();
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function navigateStep(direction) {
+            currentStep += direction;
+            if (currentStep < 1) currentStep = 1;
+            if (currentStep > 5) currentStep = 5;
+            updateStepUI();
+        }
+
+        function updateStepUI() {
+            // Hide all steps
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById(`formStep${i}`).classList.add('hidden');
+                const dot = document.getElementById(`stepDot${i}`);
+                if (i <= currentStep) {
+                    dot.className = 'w-8 h-8 rounded-full bg-brand-600 text-white font-bold text-xs flex items-center justify-center';
+                } else {
+                    dot.className = 'w-8 h-8 rounded-full bg-slate-200 text-slate-600 font-bold text-xs flex items-center justify-center';
+                }
+            }
+
+            // Show active step
+            document.getElementById(`formStep${currentStep}`).classList.remove('hidden');
+
+            // Buttons
+            const btnPrev = document.getElementById('btnPrevStep');
+            const btnNext = document.getElementById('btnNextStep');
+            const btnSubmit = document.getElementById('btnSubmitForm');
+
+            if (currentStep === 1) {
+                btnPrev.classList.add('hidden');
+            } else {
+                btnPrev.classList.remove('hidden');
+            }
+
+            if (currentStep === 5) {
+                btnNext.classList.add('hidden');
+                btnSubmit.classList.remove('hidden');
+                generateSummary();
+            } else {
+                btnNext.classList.remove('hidden');
+                btnSubmit.classList.add('hidden');
+            }
+        }
+
+        function generateSummary() {
+            const prog = document.getElementById('admProgram').value || 'Not selected';
+            const name = document.getElementById('admStudentName').value || 'Zain Ahmed (Sample)';
+            const guardian = document.getElementById('admParentName').value || 'Tariq Ahmed (Sample)';
+            const phone = document.getElementById('admParentPhone').value || '03185390057';
+            const school = document.getElementById('admPrevSchool').value || 'Model High School';
+
+            const summaryBox = document.getElementById('admissionSummaryBox');
+            summaryBox.innerHTML = `
+                <p><strong>Selected Program:</strong> ${prog}</p>
+                <p><strong>Student Name:</strong> ${name}</p>
+                <p><strong>Guardian:</strong> ${guardian} (${phone})</p>
+                <p><strong>Previous Institute:</strong> ${school}</p>
+                <p class="text-[10px] text-emerald-600 font-bold pt-1">✔ Ready for front-end demonstration submission.</p>
+            `;
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert('🎉 Application Demo Submitted Successfully!\n\nThis demonstration form demonstrates the seamless multi-step application workflow for ZUNIQ Studio clients.');
+            toggleAdmissionModal(false);
+        }
+    </script>
+
+</body>
+</html>
